@@ -1,5 +1,6 @@
 {
-  "name": "Jai",
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
+  "name": "jai",
   "rules": {
     "source_file": {
       "type": "REPEAT",
@@ -375,5 +376,6 @@
   "precedences": [],
   "externals": [],
   "inline": [],
-  "supertypes": []
+  "supertypes": [],
+  "reserved": {}
 }

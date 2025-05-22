@@ -1,0 +1,39 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "jai",
+      "camelcase": "jai",
+      "title": "jai",
+      "scope": "source.jai",
+      "file-types": [
+        "jai"
+      ],
+      "injection-regex": "^jai$",
+      "class-name": "TreeSitterJai"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "jai tree sitter",
+    "authors": [
+      {
+        "name": "?",
+        "email": "?"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/amantuladhar/tree-sitter-jai"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true,
+    "zig": false
+  }
+}
