@@ -1,0 +1,344 @@
+module.exports = grammar({
+  name: "jai",
+
+  extras: ($) => [/\s/, $.comment],
+
+  conflicts: ($) => [],
+
+  word: ($) => $.identifier,
+
+  rules: {
+    source_file: ($) => repeat($._definition),
+
+    comment: ($) =>
+      token(
+        choice(seq("//", /.*/), seq("/*", /[^*]*\*+([^/*][^*]*\*+)*/, "/")),
+      ),
+
+    _definition: ($) =>
+      choice(
+        $.function_definition,
+        $.enum_definition,
+        $.struct_definition,
+        $.variable_definition,
+        $.comment,
+        $.directive,
+        $.import_directive,
+        $.scope_module_directive,
+        $.scope_file_directive,
+        $.scope_export_directive,
+      ),
+
+    directive: ($) => seq("#", $.identifier),
+
+    import_directive: ($) =>
+      seq(
+        optional(seq(field("name", $.identifier), "::")),
+        choice("#import", "#load"),
+        '"',
+        field("path", $.string_content),
+        '"',
+        optional(seq("(", ")")),
+        optional(seq("(", $.identifier, "=", $._expression, ")")),
+        ";",
+      ),
+
+    scope_module_directive: ($) => seq("#scope_module", ";"),
+    scope_file_directive: ($) => seq("#scope_file", ";"),
+    scope_export_directive: ($) => seq("#scope_export", ";"),
+
+    string_content: ($) => /[^"]*/,
+
+    function_definition: ($) =>
+      seq(
+        field("name", $.identifier),
+        "::",
+        $.parameter_list,
+        optional(field("return_type", $.function_return_type)),
+        optional($.expand_directive),
+        field("body", $.block),
+      ),
+
+    function_return_type: ($) => seq("->", $._type),
+
+    struct_definition: ($) =>
+      seq(
+        field("name", $.identifier),
+        "::",
+        "struct",
+        field("body", $.struct_body),
+        ";",
+      ),
+
+    struct_body: ($) => seq("{", repeat($.struct_field), "}"),
+
+    struct_field: ($) =>
+      seq(
+        field("name", $.identifier),
+        ":",
+        field("type", $._type),
+        optional(seq("=", field("default_value", $._expression))),
+        ";",
+      ),
+
+    enum_definition: ($) =>
+      seq(
+        field("name", $.identifier),
+        "::",
+        choice("enum", "enum_flags"),
+        optional(field("type", $.identifier)),
+        field("body", $.enum_body),
+        ";",
+      ),
+
+    enum_body: ($) => seq("{", repeat($.enum_value), "}"),
+
+    enum_value: ($) =>
+      seq(
+        field("name", $.identifier),
+        optional(seq("::", field("value", $._expression))),
+        ";",
+      ),
+
+    variable_definition: ($) =>
+      seq(
+        field("name", $.identifier),
+        choice(
+          seq(
+            ":",
+            choice(
+              seq(field("type", $._type), "=", field("value", $._expression)),
+              seq("=", field("value", $._expression)),
+              field("type", $._type),
+            ),
+          ),
+          seq("::", field("value", $._expression)),
+        ),
+        ";",
+      ),
+
+    parameter_list: ($) =>
+      seq("(", optional(seq($.parameter, repeat(seq(",", $.parameter)))), ")"),
+
+    parameter: ($) =>
+      choice(
+        seq(field("name", $.identifier), ":", field("type", $._type)),
+        seq(field("name", $.identifier), ":", optional(field("type", $._type))),
+        seq("..", field("name", $.identifier)),
+      ),
+
+    _type: ($) =>
+      choice(
+        // Basic types
+        "bool",
+        "string",
+        "int",
+        "float",
+        "float64",
+        "float32",
+        "s64",
+        "s32",
+        "s16",
+        "s8",
+        "u64",
+        "u32",
+        "u16",
+        "u8",
+        "void",
+        "Any",
+        // User-defined types
+        $.identifier,
+        // Array types
+        seq("[", choice(optional($._expression), ".."), "]", $._type),
+        // Pointer types
+        seq("*", $._type),
+      ),
+
+    block: ($) => seq("{", repeat($._statement), "}"),
+
+    _statement: ($) =>
+      choice(
+        $.return_statement,
+        $.if_statement,
+        $.for_statement,
+        $.while_statement,
+        $.case_statement,
+        $.break_statement,
+        $.continue_statement,
+        $._definition,
+        $.expression_statement,
+        $.defer_statement,
+      ),
+
+    defer_statement: ($) => seq("defer", choice($._expression, $.block)),
+    break_statement: ($) => seq("break", optional(seq(":", $.identifier)), ";"),
+    continue_statement: ($) => seq("continue", ";"),
+    case_statement: ($) => seq("case", optional($._expression), ";"),
+    return_statement: ($) => seq("return", optional($._expression), ";"),
+
+    if_statement: ($) =>
+      prec.right(
+        seq(
+          "if",
+          optional("("),
+          field("condition", $._expression),
+          optional(")"),
+          choice(
+            field("then_branch", $.block),
+            field("then_branch", $._statement),
+          ),
+          optional(
+            seq(
+              "else",
+              field(
+                "else_branch",
+                choice($.block, $.if_statement, $._statement),
+              ),
+            ),
+          ),
+        ),
+      ),
+
+    for_statement: ($) =>
+      prec.right(
+        seq(
+          "for",
+          optional(seq($.identifier, ":")),
+          $._expression,
+          choice(field("body", $.block), field("body", $._statement)),
+        ),
+      ),
+
+    while_statement: ($) =>
+      seq(
+        "while",
+        optional(seq($.identifier, ":")),
+        field("condition", $._expression),
+        choice(field("body", $.block), field("body", $._statement)),
+      ),
+
+    expression_statement: ($) =>
+      seq(choice($._expression, $.assignment_expression), ";"),
+
+    _expression: ($) =>
+      choice(
+        $.identifier,
+        $.number,
+        $.float,
+        $.string,
+        $.boolean,
+        $.null,
+        $.function_call,
+        $.binary_expression,
+        $.unary_expression,
+        $.parenthesized_expression,
+        $.enum_value,
+        $.member_access,
+        $.varargs_expression,
+        $.cast_expr,
+        $.struct_literal_expr,
+      ),
+    enum_value: ($) => seq(".", $.identifier),
+
+    struct_literal_expr: ($) =>
+      seq(
+        optional($.identifier),
+        ".",
+        "{",
+        choice(
+          repeat(seq($.identifier, "=", $._expression)),
+          seq($._expression),
+        ),
+        "}",
+        ";",
+      ),
+
+    cast_expr: ($) => seq("xx", $._expression),
+
+    assignment_expression: ($) =>
+      seq(
+        field("left", choice($.identifier, $.member_access)),
+        field("operator", choice("=", "+=", "-=", "*=", "/=", "%=")),
+        field("right", $._expression),
+      ),
+
+    function_call: ($) =>
+      prec(
+        5,
+        seq(
+          field("function", $.identifier),
+          field("arguments", $.argument_list),
+        ),
+      ),
+
+    argument_list: ($) =>
+      seq(
+        "(",
+        optional(seq($._expression, repeat(seq(",", $._expression)))),
+        ")",
+      ),
+
+    binary_expression: ($) =>
+      prec.left(
+        1,
+        seq(
+          field("left", $._expression),
+          field(
+            "operator",
+            choice(
+              "+",
+              "-",
+              "*",
+              "/",
+              "%",
+              "==",
+              "!=",
+              "<",
+              "<=",
+              ">",
+              ">=",
+              "&&",
+              "||",
+              "&",
+              "|",
+              "^",
+              "<<",
+              ">>",
+            ),
+          ),
+          field("right", $._expression),
+        ),
+      ),
+
+    unary_expression: ($) =>
+      prec.right(
+        3,
+        seq(
+          field("operator", choice("-", "!", "~", "*", "&")),
+          field("argument", $._expression),
+        ),
+      ),
+
+    parenthesized_expression: ($) => seq("(", $._expression, ")"),
+
+    identifier: ($) => /[a-zA-Z_]\w*/,
+    number: ($) => /\d+/,
+    float: ($) => /\d+\.\d+/,
+    string: ($) => seq('"', optional($.string_content), '"'),
+
+    member_access: ($) =>
+      prec(
+        6,
+        seq(
+          field("object", $._expression),
+          ".",
+          field("property", $.identifier),
+        ),
+      ),
+
+    varargs_expression: ($) =>
+      prec.right(2, seq($._expression, "..", $._expression)),
+    boolean: ($) => choice("true", "false"),
+    null: ($) => "null",
+  },
+});
