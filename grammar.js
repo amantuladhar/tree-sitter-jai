@@ -17,6 +17,8 @@ module.exports = grammar({
     [$.assignment_expression, $._expression],
     [$.proc_call_expr, $.enum_value_expr, $.struct_literal_expr],
     [$.enum_value_expr, $.struct_literal_expr],
+    [$.case_statement, $._expression],
+    [$.argument_list, $._expression],
     [
       $.proc_call_expr,
       $._expression,
@@ -38,7 +40,13 @@ module.exports = grammar({
         $.enum_definition,
         $.constant,
         $.variable,
+        $.scope_module,
+        $.scope_file,
+        $.scope_export,
       ),
+    scope_module: ($) => seq("#scope_module", optional(";")),
+    scope_file: ($) => seq("#scope_file", optional(";")),
+    scope_export: ($) => seq("#scope_export", optional(";")),
 
     struct_definition: ($) =>
       seq(
@@ -87,6 +95,7 @@ module.exports = grammar({
       ),
     parameter_list: ($) =>
       seq("(", optional(seq($.parameter, repeat(seq(",", $.parameter)))), ")"),
+
     return_type: ($) => seq("->", $._type),
     block: ($) => seq("{", repeat($._statement), "}"),
 
@@ -108,7 +117,13 @@ module.exports = grammar({
         $.defer_statement,
         $.using_statement,
       ),
-    case_statement: ($) => seq("case", optional($._expression), ";"),
+    case_statement: ($) =>
+      seq(
+        "case",
+        optional(field("directive", $.directive)),
+        optional($._expression),
+        ";",
+      ),
     break_statement: ($) => seq("break", optional(seq(":", $.identifier)), ";"),
     continue_statement: ($) => seq("continue", ";"),
 
@@ -185,7 +200,15 @@ module.exports = grammar({
     argument_list: ($) =>
       seq(
         "(",
-        optional(seq($._expression, repeat(seq(",", $._expression)))),
+        choice(
+          optional(
+            seq(
+              $._expression,
+              repeat(choice(seq(",", $._expression), seq("..", $.identifier))),
+            ),
+          ),
+          seq("..", $.identifier),
+        ),
         ")",
       ),
 
@@ -233,7 +256,13 @@ module.exports = grammar({
       ),
     parameter: ($) =>
       choice(
-        seq(field("name", $.identifier), ":", field("type", $._type)),
+        seq(
+          optional($.using),
+          field("name", $.identifier),
+          ":",
+          field("type", $._type),
+          optional(seq("=", $._expression)),
+        ),
         seq(field("name", $.identifier), ":", "..", field("type", $._type)),
       ),
 
@@ -272,6 +301,7 @@ module.exports = grammar({
         $.undefined,
         $.dereference,
         $.auto_cast_expr,
+        seq($.directive, $._expression),
       ),
     auto_cast_expr: ($) => seq("xx", $.identifier),
     dereference: ($) => seq($.identifier, ".", "*"),
@@ -363,7 +393,7 @@ module.exports = grammar({
 
     directive: ($) => seq("#", $.identifier),
     using: ($) => "using",
-    string_content: ($) => /[^"]*/,
+    string_content: ($) => token(/([^"\\]|\\.)*/),
     identifier: ($) => /[a-zA-Z_]\w*/,
     number: ($) => /[\d_]+/,
     float: ($) => /\d+\.\d+/,

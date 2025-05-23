@@ -24,6 +24,10 @@
           "named": true
         },
         {
+          "type": "directive",
+          "named": true
+        },
+        {
           "type": "enum_value_expr",
           "named": true
         },
@@ -136,6 +140,10 @@
           },
           {
             "type": "dereference",
+            "named": true
+          },
+          {
+            "type": "directive",
             "named": true
           },
           {
@@ -279,7 +287,7 @@
         ]
       },
       "right": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
@@ -296,6 +304,10 @@
           },
           {
             "type": "dereference",
+            "named": true
+          },
+          {
+            "type": "directive",
             "named": true
           },
           {
@@ -374,7 +386,7 @@
     "named": true,
     "fields": {
       "left": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -391,6 +403,10 @@
           },
           {
             "type": "dereference",
+            "named": true
+          },
+          {
+            "type": "directive",
             "named": true
           },
           {
@@ -526,7 +542,7 @@
         ]
       },
       "right": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -543,6 +559,10 @@
           },
           {
             "type": "dereference",
+            "named": true
+          },
+          {
+            "type": "directive",
             "named": true
           },
           {
@@ -691,9 +711,20 @@
   {
     "type": "case_statement",
     "named": true,
-    "fields": {},
+    "fields": {
+      "directive": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "directive",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
@@ -710,6 +741,10 @@
         },
         {
           "type": "dereference",
+          "named": true
+        },
+        {
+          "type": "directive",
           "named": true
         },
         {
@@ -789,6 +824,10 @@
         },
         {
           "type": "dereference",
+          "named": true
+        },
+        {
+          "type": "directive",
           "named": true
         },
         {
@@ -992,7 +1031,7 @@
         ]
       },
       "value": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
@@ -1009,6 +1048,10 @@
           },
           {
             "type": "dereference",
+            "named": true
+          },
+          {
+            "type": "directive",
             "named": true
           },
           {
@@ -1072,7 +1115,7 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
@@ -1093,6 +1136,10 @@
         },
         {
           "type": "dereference",
+          "named": true
+        },
+        {
+          "type": "directive",
           "named": true
         },
         {
@@ -1246,6 +1293,10 @@
           "named": true
         },
         {
+          "type": "directive",
+          "named": true
+        },
+        {
           "type": "enum_value_expr",
           "named": true
         },
@@ -1305,7 +1356,7 @@
     "named": true,
     "fields": {
       "condition": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -1322,6 +1373,10 @@
           },
           {
             "type": "dereference",
+            "named": true
+          },
+          {
+            "type": "directive",
             "named": true
           },
           {
@@ -1395,7 +1450,7 @@
     "named": true,
     "fields": {
       "condition": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -1412,6 +1467,10 @@
           },
           {
             "type": "dereference",
+            "named": true
+          },
+          {
+            "type": "directive",
             "named": true
           },
           {
@@ -1656,6 +1715,10 @@
           "named": true
         },
         {
+          "type": "directive",
+          "named": true
+        },
+        {
           "type": "enum_value_expr",
           "named": true
         },
@@ -1715,7 +1778,7 @@
     "named": true,
     "fields": {
       "object": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -1732,6 +1795,10 @@
           },
           {
             "type": "dereference",
+            "named": true
+          },
+          {
+            "type": "directive",
             "named": true
           },
           {
@@ -1867,6 +1934,10 @@
             "named": true
           },
           {
+            "type": "directive",
+            "named": true
+          },
+          {
             "type": "enum_value_expr",
             "named": true
           },
@@ -1976,6 +2047,88 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "auto_cast_expr",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "dereference",
+          "named": true
+        },
+        {
+          "type": "directive",
+          "named": true
+        },
+        {
+          "type": "enum_value_expr",
+          "named": true
+        },
+        {
+          "type": "float",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "member_access_expr",
+          "named": true
+        },
+        {
+          "type": "null",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "proc_call_expr",
+          "named": true
+        },
+        {
+          "type": "range_expr",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "struct_literal_expr",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "undefined",
+          "named": true
+        },
+        {
+          "type": "using",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1998,7 +2151,7 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
@@ -2015,6 +2168,10 @@
         },
         {
           "type": "dereference",
+          "named": true
+        },
+        {
+          "type": "directive",
           "named": true
         },
         {
@@ -2171,6 +2328,10 @@
           "named": true
         },
         {
+          "type": "directive",
+          "named": true
+        },
+        {
           "type": "enum_value_expr",
           "named": true
         },
@@ -2230,7 +2391,7 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
@@ -2247,6 +2408,10 @@
         },
         {
           "type": "dereference",
+          "named": true
+        },
+        {
+          "type": "directive",
           "named": true
         },
         {
@@ -2329,6 +2494,10 @@
           "named": true
         },
         {
+          "type": "directive",
+          "named": true
+        },
+        {
           "type": "enum_value_expr",
           "named": true
         },
@@ -2384,6 +2553,21 @@
     }
   },
   {
+    "type": "scope_export",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "scope_file",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "scope_module",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "source_file",
     "named": true,
     "root": true,
@@ -2406,6 +2590,18 @@
         },
         {
           "type": "proc_definition",
+          "named": true
+        },
+        {
+          "type": "scope_export",
+          "named": true
+        },
+        {
+          "type": "scope_file",
+          "named": true
+        },
+        {
+          "type": "scope_module",
           "named": true
         },
         {
@@ -2480,7 +2676,7 @@
     "named": true,
     "fields": {
       "default_value": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
@@ -2497,6 +2693,10 @@
           },
           {
             "type": "dereference",
+            "named": true
+          },
+          {
+            "type": "directive",
             "named": true
           },
           {
@@ -2613,6 +2813,10 @@
           },
           {
             "type": "dereference",
+            "named": true
+          },
+          {
+            "type": "directive",
             "named": true
           },
           {
@@ -2752,6 +2956,10 @@
           "named": true
         },
         {
+          "type": "directive",
+          "named": true
+        },
+        {
           "type": "enum_value_expr",
           "named": true
         },
@@ -2828,6 +3036,10 @@
         },
         {
           "type": "dereference",
+          "named": true
+        },
+        {
+          "type": "directive",
           "named": true
         },
         {
@@ -2913,7 +3125,7 @@
     "named": true,
     "fields": {
       "argument": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -2930,6 +3142,10 @@
           },
           {
             "type": "dereference",
+            "named": true
+          },
+          {
+            "type": "directive",
             "named": true
           },
           {
@@ -3013,6 +3229,11 @@
         ]
       }
     }
+  },
+  {
+    "type": "using",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "using_statement",
@@ -3103,6 +3324,10 @@
         },
         {
           "type": "dereference",
+          "named": true
+        },
+        {
+          "type": "directive",
           "named": true
         },
         {
@@ -3235,7 +3460,7 @@
         ]
       },
       "condition": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -3252,6 +3477,10 @@
           },
           {
             "type": "dereference",
+            "named": true
+          },
+          {
+            "type": "directive",
             "named": true
           },
           {
@@ -3342,6 +3571,18 @@
   },
   {
     "type": "#load",
+    "named": false
+  },
+  {
+    "type": "#scope_export",
+    "named": false
+  },
+  {
+    "type": "#scope_file",
+    "named": false
+  },
+  {
+    "type": "#scope_module",
     "named": false
   },
   {
@@ -3531,11 +3772,11 @@
   },
   {
     "type": "float",
-    "named": false
+    "named": true
   },
   {
     "type": "float",
-    "named": true
+    "named": false
   },
   {
     "type": "float32",
