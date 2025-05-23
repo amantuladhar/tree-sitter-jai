@@ -1639,6 +1639,23 @@
         {
           "type": "SYMBOL",
           "name": "dereference"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "auto_cast_expr"
+        }
+      ]
+    },
+    "auto_cast_expr": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "xx"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
         }
       ]
     },
