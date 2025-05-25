@@ -1868,6 +1868,100 @@
     }
   },
   {
+    "type": "named_return_expr",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "auto_cast_expr",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "dereference",
+          "named": true
+        },
+        {
+          "type": "directive",
+          "named": true
+        },
+        {
+          "type": "enum_value_expr",
+          "named": true
+        },
+        {
+          "type": "float",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "member_access_expr",
+          "named": true
+        },
+        {
+          "type": "null",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "proc_call_expr",
+          "named": true
+        },
+        {
+          "type": "range_expr",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "struct_literal_expr",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "undefined",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "parameter",
     "named": true,
     "fields": {
@@ -2297,7 +2391,7 @@
           "named": true
         },
         {
-          "type": "return_type",
+          "type": "return_expr",
           "named": true
         }
       ]
@@ -2387,6 +2481,21 @@
     }
   },
   {
+    "type": "return_expr",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "return_type_expr",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "return_statement",
     "named": true,
     "fields": {},
@@ -2431,6 +2540,10 @@
           "named": true
         },
         {
+          "type": "named_return_expr",
+          "named": true
+        },
+        {
           "type": "null",
           "named": true
         },
@@ -2470,9 +2583,264 @@
     }
   },
   {
-    "type": "return_type",
+    "type": "return_type_expr",
     "named": true,
-    "fields": {},
+    "fields": {
+      "default_value": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "auto_cast_expr",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean",
+            "named": true
+          },
+          {
+            "type": "dereference",
+            "named": true
+          },
+          {
+            "type": "directive",
+            "named": true
+          },
+          {
+            "type": "enum_value_expr",
+            "named": true
+          },
+          {
+            "type": "float",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "member_access_expr",
+            "named": true
+          },
+          {
+            "type": "null",
+            "named": true
+          },
+          {
+            "type": "number",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "proc_call_expr",
+            "named": true
+          },
+          {
+            "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          },
+          {
+            "type": "struct_literal_expr",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "undefined",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "type": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "*",
+            "named": false
+          },
+          {
+            "type": "..",
+            "named": false
+          },
+          {
+            "type": "Any",
+            "named": false
+          },
+          {
+            "type": "Context",
+            "named": false
+          },
+          {
+            "type": "Type",
+            "named": false
+          },
+          {
+            "type": "[",
+            "named": false
+          },
+          {
+            "type": "]",
+            "named": false
+          },
+          {
+            "type": "auto_cast_expr",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "bool",
+            "named": false
+          },
+          {
+            "type": "boolean",
+            "named": true
+          },
+          {
+            "type": "dereference",
+            "named": true
+          },
+          {
+            "type": "directive",
+            "named": true
+          },
+          {
+            "type": "enum_value_expr",
+            "named": true
+          },
+          {
+            "type": "float",
+            "named": false
+          },
+          {
+            "type": "float",
+            "named": true
+          },
+          {
+            "type": "float32",
+            "named": false
+          },
+          {
+            "type": "float64",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "int",
+            "named": false
+          },
+          {
+            "type": "member_access_expr",
+            "named": true
+          },
+          {
+            "type": "null",
+            "named": true
+          },
+          {
+            "type": "number",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "proc_call_expr",
+            "named": true
+          },
+          {
+            "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "s16",
+            "named": false
+          },
+          {
+            "type": "s32",
+            "named": false
+          },
+          {
+            "type": "s64",
+            "named": false
+          },
+          {
+            "type": "s8",
+            "named": false
+          },
+          {
+            "type": "string",
+            "named": false
+          },
+          {
+            "type": "string",
+            "named": true
+          },
+          {
+            "type": "struct_literal_expr",
+            "named": true
+          },
+          {
+            "type": "u16",
+            "named": false
+          },
+          {
+            "type": "u32",
+            "named": false
+          },
+          {
+            "type": "u64",
+            "named": false
+          },
+          {
+            "type": "u8",
+            "named": false
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "undefined",
+            "named": true
+          },
+          {
+            "type": "void",
+            "named": false
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": false,
@@ -3772,11 +4140,11 @@
   },
   {
     "type": "float",
-    "named": true
+    "named": false
   },
   {
     "type": "float",
-    "named": false
+    "named": true
   },
   {
     "type": "float32",

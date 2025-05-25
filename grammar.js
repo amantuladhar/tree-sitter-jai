@@ -89,14 +89,32 @@ module.exports = grammar({
         field("name", $.identifier),
         "::",
         $.parameter_list,
-        optional($.return_type),
+        optional($.return_expr),
         optional(repeat($.directive)),
         $.block,
       ),
     parameter_list: ($) =>
       seq("(", optional(seq($.parameter, repeat(seq(",", $.parameter)))), ")"),
 
-    return_type: ($) => seq("->", $._type),
+    return_expr: ($) =>
+      seq(
+        "->",
+        optional("("),
+        optional(seq($.return_type_expr, repeat(seq(",", $.return_type_expr)))),
+        optional(")"),
+      ),
+
+    return_type_expr: ($) =>
+      choice(
+        $._type,
+        seq(
+          field("name", $.identifier),
+          ":",
+          field("type", $._type),
+          optional(seq("=", field("default_value", $._expression))),
+        ),
+      ),
+
     block: ($) => seq("{", repeat($._statement), "}"),
 
     _statement: ($) =>
@@ -170,7 +188,23 @@ module.exports = grammar({
         ),
       ),
     using_statement: ($) => seq("using", $._statement),
-    return_statement: ($) => seq("return", optional($._expression), ";"),
+
+    // optional(seq($.return_type_expr, repeat(seq(",", $.return_type_expr)))),
+    return_statement: ($) =>
+      seq(
+        "return",
+        optional(
+          choice(
+            $._expression,
+            seq($._expression, repeat(seq(",", $._expression))),
+            seq($.named_return_expr, repeat(seq(",", $.named_return_expr))),
+          ),
+        ),
+        ";",
+      ),
+    named_return_expr: ($) =>
+      seq(field("name", $.identifier), "=", $._expression),
+
     expr_stmt: ($) => seq(choice($._expression, $.assignment_expression), ";"),
     assignment_expression: ($) =>
       seq(
