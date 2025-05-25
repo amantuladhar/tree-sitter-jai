@@ -89,24 +89,29 @@ module.exports = grammar({
         field("name", $.identifier),
         "::",
         $.parameter_list,
-        optional($.return_expr),
+        optional($.proc_return_expr),
         optional(repeat($.directive)),
         $.block,
       ),
     parameter_list: ($) =>
       seq("(", optional(seq($.parameter, repeat(seq(",", $.parameter)))), ")"),
 
-    return_expr: ($) =>
+    proc_return_expr: ($) =>
       seq(
         "->",
         optional("("),
-        optional(seq($.return_type_expr, repeat(seq(",", $.return_type_expr)))),
+        optional(
+          seq(
+            $.proc_return_type_expr,
+            repeat(seq(",", $.proc_return_type_expr)),
+          ),
+        ),
         optional(")"),
       ),
 
-    return_type_expr: ($) =>
+    proc_return_type_expr: ($) =>
       choice(
-        $._type,
+        field("type", $._type),
         seq(
           field("name", $.identifier),
           ":",
@@ -127,7 +132,6 @@ module.exports = grammar({
         $.case_statement,
         $.break_statement,
         $.continue_statement,
-        //       $._definition,
         seq($.directive, ";"),
         $.constant,
         $.variable,
@@ -189,7 +193,6 @@ module.exports = grammar({
       ),
     using_statement: ($) => seq("using", $._statement),
 
-    // optional(seq($.return_type_expr, repeat(seq(",", $.return_type_expr)))),
     return_statement: ($) =>
       seq(
         "return",
