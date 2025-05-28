@@ -40,6 +40,10 @@
           "named": true
         },
         {
+          "type": "ifx_expr",
+          "named": true
+        },
+        {
           "type": "member_access_expr",
           "named": true
         },
@@ -123,6 +127,10 @@
           "named": true
         },
         {
+          "type": "ifx_expr",
+          "named": true
+        },
+        {
           "type": "member_access_expr",
           "named": true
         },
@@ -163,6 +171,22 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "assert_directive",
+    "named": true,
+    "fields": {
+      "arguments": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "argument_list",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -251,6 +275,10 @@
           },
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "ifx_expr",
             "named": true
           },
           {
@@ -406,6 +434,10 @@
             "named": true
           },
           {
+            "type": "ifx_expr",
+            "named": true
+          },
+          {
             "type": "member_access_expr",
             "named": true
           },
@@ -490,6 +522,10 @@
           "named": true
         },
         {
+          "type": "ifx_expr",
+          "named": true
+        },
+        {
           "type": "member_access_expr",
           "named": true
         },
@@ -570,6 +606,10 @@
           },
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "ifx_expr",
             "named": true
           },
           {
@@ -729,6 +769,10 @@
             "named": true
           },
           {
+            "type": "ifx_expr",
+            "named": true
+          },
+          {
             "type": "member_access_expr",
             "named": true
           },
@@ -780,6 +824,10 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "assert_directive",
+          "named": true
+        },
         {
           "type": "break_statement",
           "named": true
@@ -915,6 +963,10 @@
           "named": true
         },
         {
+          "type": "ifx_expr",
+          "named": true
+        },
+        {
           "type": "member_access_expr",
           "named": true
         },
@@ -960,7 +1012,18 @@
   {
     "type": "code_directive",
     "named": true,
-    "fields": {},
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "#code",
+            "named": false
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": false,
       "required": true,
@@ -1014,6 +1077,10 @@
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "ifx_expr",
           "named": true
         },
         {
@@ -1241,6 +1308,10 @@
             "named": true
           },
           {
+            "type": "ifx_expr",
+            "named": true
+          },
+          {
             "type": "member_access_expr",
             "named": true
           },
@@ -1329,6 +1400,10 @@
           "named": true
         },
         {
+          "type": "ifx_expr",
+          "named": true
+        },
+        {
           "type": "member_access_expr",
           "named": true
         },
@@ -1382,6 +1457,10 @@
           {
             "type": ";",
             "named": false
+          },
+          {
+            "type": "assert_directive",
+            "named": true
           },
           {
             "type": "block",
@@ -1487,6 +1566,10 @@
           "named": true
         },
         {
+          "type": "ifx_expr",
+          "named": true
+        },
+        {
           "type": "member_access_expr",
           "named": true
         },
@@ -1567,6 +1650,10 @@
           },
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "ifx_expr",
             "named": true
           },
           {
@@ -1664,6 +1751,10 @@
             "named": true
           },
           {
+            "type": "ifx_expr",
+            "named": true
+          },
+          {
             "type": "member_access_expr",
             "named": true
           },
@@ -1712,6 +1803,10 @@
           {
             "type": ";",
             "named": false
+          },
+          {
+            "type": "assert_directive",
+            "named": true
           },
           {
             "type": "block",
@@ -1788,6 +1883,10 @@
             "named": false
           },
           {
+            "type": "assert_directive",
+            "named": true
+          },
+          {
             "type": "block",
             "named": true
           },
@@ -1856,6 +1955,272 @@
     }
   },
   {
+    "type": "ifx_expr",
+    "named": true,
+    "fields": {
+      "condition": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "array_access",
+            "named": true
+          },
+          {
+            "type": "auto_cast_expr",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean",
+            "named": true
+          },
+          {
+            "type": "dereference",
+            "named": true
+          },
+          {
+            "type": "enum_value_expr",
+            "named": true
+          },
+          {
+            "type": "float",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "ifx_expr",
+            "named": true
+          },
+          {
+            "type": "member_access_expr",
+            "named": true
+          },
+          {
+            "type": "null",
+            "named": true
+          },
+          {
+            "type": "number",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "proc_call_expr",
+            "named": true
+          },
+          {
+            "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          },
+          {
+            "type": "struct_literal_expr",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "undefined",
+            "named": true
+          }
+        ]
+      },
+      "else_branch": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "array_access",
+            "named": true
+          },
+          {
+            "type": "auto_cast_expr",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean",
+            "named": true
+          },
+          {
+            "type": "dereference",
+            "named": true
+          },
+          {
+            "type": "enum_value_expr",
+            "named": true
+          },
+          {
+            "type": "float",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "ifx_expr",
+            "named": true
+          },
+          {
+            "type": "member_access_expr",
+            "named": true
+          },
+          {
+            "type": "null",
+            "named": true
+          },
+          {
+            "type": "number",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "proc_call_expr",
+            "named": true
+          },
+          {
+            "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          },
+          {
+            "type": "struct_literal_expr",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "undefined",
+            "named": true
+          }
+        ]
+      },
+      "keyword": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "ifx",
+            "named": false
+          },
+          {
+            "type": "then",
+            "named": false
+          }
+        ]
+      },
+      "then_branch": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "array_access",
+            "named": true
+          },
+          {
+            "type": "auto_cast_expr",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean",
+            "named": true
+          },
+          {
+            "type": "dereference",
+            "named": true
+          },
+          {
+            "type": "enum_value_expr",
+            "named": true
+          },
+          {
+            "type": "float",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "ifx_expr",
+            "named": true
+          },
+          {
+            "type": "member_access_expr",
+            "named": true
+          },
+          {
+            "type": "null",
+            "named": true
+          },
+          {
+            "type": "number",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "proc_call_expr",
+            "named": true
+          },
+          {
+            "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          },
+          {
+            "type": "struct_literal_expr",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "undefined",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "import_directive",
     "named": true,
     "fields": {
@@ -1914,6 +2279,10 @@
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "ifx_expr",
           "named": true
         },
         {
@@ -2012,6 +2381,10 @@
           },
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "ifx_expr",
             "named": true
           },
           {
@@ -2117,6 +2490,10 @@
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "ifx_expr",
           "named": true
         },
         {
@@ -2257,6 +2634,10 @@
             "named": true
           },
           {
+            "type": "ifx_expr",
+            "named": true
+          },
+          {
             "type": "int",
             "named": false
           },
@@ -2380,6 +2761,10 @@
           "named": true
         },
         {
+          "type": "ifx_expr",
+          "named": true
+        },
+        {
           "type": "member_access_expr",
           "named": true
         },
@@ -2479,6 +2864,10 @@
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "ifx_expr",
           "named": true
         },
         {
@@ -2654,6 +3043,10 @@
             "named": true
           },
           {
+            "type": "ifx_expr",
+            "named": true
+          },
+          {
             "type": "member_access_expr",
             "named": true
           },
@@ -2786,6 +3179,10 @@
             "named": true
           },
           {
+            "type": "ifx_expr",
+            "named": true
+          },
+          {
             "type": "int",
             "named": false
           },
@@ -2914,6 +3311,10 @@
           "named": true
         },
         {
+          "type": "ifx_expr",
+          "named": true
+        },
+        {
           "type": "member_access_expr",
           "named": true
         },
@@ -2994,6 +3395,10 @@
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "ifx_expr",
           "named": true
         },
         {
@@ -3203,6 +3608,10 @@
             "named": true
           },
           {
+            "type": "ifx_expr",
+            "named": true
+          },
+          {
             "type": "member_access_expr",
             "named": true
           },
@@ -3335,6 +3744,10 @@
             "named": true
           },
           {
+            "type": "ifx_expr",
+            "named": true
+          },
+          {
             "type": "int",
             "named": false
           },
@@ -3463,6 +3876,10 @@
           "named": true
         },
         {
+          "type": "ifx_expr",
+          "named": true
+        },
+        {
           "type": "member_access_expr",
           "named": true
         },
@@ -3543,6 +3960,10 @@
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "ifx_expr",
           "named": true
         },
         {
@@ -3652,6 +4073,10 @@
             "named": true
           },
           {
+            "type": "ifx_expr",
+            "named": true
+          },
+          {
             "type": "member_access_expr",
             "named": true
           },
@@ -3734,6 +4159,10 @@
       "multiple": false,
       "required": true,
       "types": [
+        {
+          "type": "assert_directive",
+          "named": true
+        },
         {
           "type": "break_statement",
           "named": true
@@ -3838,6 +4267,10 @@
           "named": true
         },
         {
+          "type": "ifx_expr",
+          "named": true
+        },
+        {
           "type": "member_access_expr",
           "named": true
         },
@@ -3891,6 +4324,10 @@
           {
             "type": ";",
             "named": false
+          },
+          {
+            "type": "assert_directive",
+            "named": true
           },
           {
             "type": "block",
@@ -3995,6 +4432,10 @@
             "named": true
           },
           {
+            "type": "ifx_expr",
+            "named": true
+          },
+          {
             "type": "member_access_expr",
             "named": true
           },
@@ -4065,7 +4506,15 @@
     "named": false
   },
   {
+    "type": "#assert",
+    "named": false
+  },
+  {
     "type": "#code",
+    "named": false
+  },
+  {
+    "type": "#if",
     "named": false
   },
   {
@@ -4283,11 +4732,11 @@
   },
   {
     "type": "float",
-    "named": false
+    "named": true
   },
   {
     "type": "float",
-    "named": true
+    "named": false
   },
   {
     "type": "float32",
@@ -4307,6 +4756,10 @@
   },
   {
     "type": "if",
+    "named": false
+  },
+  {
+    "type": "ifx",
     "named": false
   },
   {

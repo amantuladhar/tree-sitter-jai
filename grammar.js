@@ -139,6 +139,7 @@ module.exports = grammar({
         $.defer_statement,
         $.using_statement,
         $.insert_directive,
+        $.assert_directive,
       ),
     case_statement: ($) =>
       seq(
@@ -167,12 +168,18 @@ module.exports = grammar({
         ),
       ),
 
-    if_case: ($) => seq("if", field("condition", $._expression), "==", $.block),
+    if_case: ($) =>
+      seq(
+        choice("if", "#if"),
+        field("condition", $._expression),
+        "==",
+        $.block,
+      ),
 
     if_statement: ($) =>
       prec.right(
         seq(
-          "if",
+          choice("if", "#if"),
           optional("("),
           field("condition", $._expression),
           optional(")"),
@@ -190,6 +197,19 @@ module.exports = grammar({
               ),
             ),
           ),
+        ),
+      ),
+    ifx_expr: ($) =>
+      prec.right(
+        1,
+        seq(
+          field("keyword", "ifx"),
+          optional("("),
+          field("condition", $._expression),
+          optional(")"),
+          optional(field("keyword", "then")),
+          choice(field("then_branch", $._expression)),
+          optional(seq("else", field("else_branch", choice($._expression)))),
         ),
       ),
     using_statement: ($) => seq("using", $._statement),
@@ -288,8 +308,10 @@ module.exports = grammar({
         seq($.identifier, ":", $._type, ":", $._expression, ";"),
         seq($.identifier, "::", $.code_directive),
       ),
-    code_directive: ($) => seq("#code", $.block),
+    code_directive: ($) => seq(field("name", "#code"), $.block),
     insert_directive: ($) => seq("#insert", $.identifier, ";"),
+    assert_directive: ($) =>
+      seq("#assert", field("arguments", $.argument_list), ";"),
     variable: ($) =>
       choice(
         seq($.identifier, ":=", $._expression, ";"),
@@ -345,6 +367,7 @@ module.exports = grammar({
         $.dereference,
         $.auto_cast_expr,
         $.array_access,
+        $.ifx_expr,
       ),
     array_access: ($) => seq($.identifier, "[", $._expression, "]"),
     auto_cast_expr: ($) => seq("xx", $._expression),
