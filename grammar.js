@@ -33,16 +33,21 @@ module.exports = grammar({
     source_file: ($) => repeat($._definition),
 
     _definition: ($) =>
-      choice(
-        $.import_directive,
-        $.proc_definition,
-        $.struct_definition,
-        $.enum_definition,
-        $.constant,
-        $.variable,
-        $.scope_module,
-        $.scope_file,
-        $.scope_export,
+      prec(
+        1,
+        choice(
+          $.import_directive,
+          $.proc_definition,
+          $.struct_definition,
+          $.enum_definition,
+          $.constant,
+          $.variable,
+          $.scope_module,
+          $.scope_file,
+          $.scope_export,
+          $.if_directive,
+          $.if_case_directive,
+        ),
       ),
     scope_module: ($) => seq("#scope_module", optional(";")),
     scope_file: ($) => seq("#scope_file", optional(";")),
@@ -120,7 +125,12 @@ module.exports = grammar({
         ),
       ),
 
-    block: ($) => seq("{", repeat($._statement), "}"),
+    block: ($) =>
+      seq(
+        "{",
+        repeat(choice($._statement, $.if_directive, $.if_case_directive)),
+        "}",
+      ),
 
     _statement: ($) =>
       choice(
@@ -168,18 +178,45 @@ module.exports = grammar({
         ),
       ),
 
-    if_case: ($) =>
-      seq(
-        choice("if", "#if"),
-        field("condition", $._expression),
-        "==",
-        $.block,
+    if_case: ($) => seq("if", field("condition", $._expression), "==", $.block),
+
+    if_case_directive: ($) =>
+      prec.right(
+        seq(
+          "#if",
+          field("condition", $._expression),
+          "==",
+          seq("{", seq(repeat(choice($._statement, $._definition))), "}"),
+        ),
+      ),
+
+    if_directive: ($) =>
+      prec.right(
+        1,
+        seq(
+          "#if",
+          optional("("),
+          field("condition", $._expression),
+          optional(")"),
+          optional("then"),
+          choice(
+            field("then_branch", $.block),
+            field("then_branch", $._definition),
+            field("then_branch", $._statement),
+          ),
+          optional(
+            seq(
+              "else",
+              field("else_branch", choice($._definition, $._statement)),
+            ),
+          ),
+        ),
       ),
 
     if_statement: ($) =>
       prec.right(
         seq(
-          choice("if", "#if"),
+          "if",
           optional("("),
           field("condition", $._expression),
           optional(")"),

@@ -1,3 +1,11 @@
+#if OS == {
+    case .MACOS;
+        MacOS :: #import "MacOS";
+    case .LINUX;
+        Linux :: #import "Linux";
+    case;
+}
+
 test :: () {
     #if OS == {
         case .LINUX;
