@@ -138,6 +138,7 @@ module.exports = grammar({
         $.expr_stmt,
         $.defer_statement,
         $.using_statement,
+        $.insert_directive,
       ),
     case_statement: ($) =>
       seq(
@@ -285,7 +286,10 @@ module.exports = grammar({
       choice(
         seq($.identifier, "::", $._expression, ";"),
         seq($.identifier, ":", $._type, ":", $._expression, ";"),
+        seq($.identifier, "::", $.code_directive),
       ),
+    code_directive: ($) => seq("#code", $.block),
+    insert_directive: ($) => seq("#insert", $.identifier, ";"),
     variable: ($) =>
       choice(
         seq($.identifier, ":=", $._expression, ";"),
@@ -295,8 +299,10 @@ module.exports = grammar({
       choice(
         seq(
           optional($.using),
+          optional("$"),
           field("name", $.identifier),
           ":",
+          optional("$"),
           field("type", $._type),
           optional(seq("=", $._expression)),
         ),
@@ -338,9 +344,10 @@ module.exports = grammar({
         $.undefined,
         $.dereference,
         $.auto_cast_expr,
-        seq($.directive, $._expression),
+        $.array_access,
       ),
-    auto_cast_expr: ($) => seq("xx", $.identifier),
+    array_access: ($) => seq($.identifier, "[", $._expression, "]"),
+    auto_cast_expr: ($) => seq("xx", $._expression),
     dereference: ($) => seq($.identifier, ".", "*"),
     undefined: ($) => "---",
     range_expr: ($) => prec.right(2, seq($._expression, "..", $._expression)),
