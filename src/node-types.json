@@ -318,6 +318,10 @@
             "named": true
           },
           {
+            "type": "proc_decl",
+            "named": true
+          },
+          {
             "type": "range_expr",
             "named": true
           },
@@ -1160,6 +1164,10 @@
         },
         {
           "type": "proc_call_expr",
+          "named": true
+        },
+        {
+          "type": "proc_decl",
           "named": true
         },
         {
@@ -3283,6 +3291,10 @@
             "named": true
           },
           {
+            "type": "proc_decl",
+            "named": true
+          },
+          {
             "type": "range_expr",
             "named": true
           },
@@ -3579,6 +3591,29 @@
     }
   },
   {
+    "type": "proc_decl",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "directive",
+          "named": true
+        },
+        {
+          "type": "parameter_list",
+          "named": true
+        },
+        {
+          "type": "proc_return_expr",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "proc_definition",
     "named": true,
     "fields": {
@@ -3841,6 +3876,10 @@
           },
           {
             "type": "proc_call_expr",
+            "named": true
+          },
+          {
+            "type": "proc_decl",
             "named": true
           },
           {
@@ -4188,7 +4227,71 @@
       "required": false,
       "types": [
         {
+          "type": "assert_directive",
+          "named": true
+        },
+        {
+          "type": "break_statement",
+          "named": true
+        },
+        {
+          "type": "case_statement",
+          "named": true
+        },
+        {
+          "type": "constant",
+          "named": true
+        },
+        {
+          "type": "continue_statement",
+          "named": true
+        },
+        {
+          "type": "defer_statement",
+          "named": true
+        },
+        {
+          "type": "directive",
+          "named": true
+        },
+        {
+          "type": "expr_stmt",
+          "named": true
+        },
+        {
+          "type": "for_statement",
+          "named": true
+        },
+        {
+          "type": "if_case",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "insert_directive",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
           "type": "struct_field",
+          "named": true
+        },
+        {
+          "type": "using_statement",
+          "named": true
+        },
+        {
+          "type": "variable",
+          "named": true
+        },
+        {
+          "type": "while_statement",
           "named": true
         }
       ]
@@ -4430,6 +4533,10 @@
           },
           {
             "type": "proc_call_expr",
+            "named": true
+          },
+          {
+            "type": "proc_decl",
             "named": true
           },
           {
@@ -4968,6 +5075,10 @@
           "named": true
         },
         {
+          "type": "proc_decl",
+          "named": true
+        },
+        {
           "type": "range_expr",
           "named": true
         },
@@ -5421,11 +5532,11 @@
   },
   {
     "type": "float",
-    "named": false
+    "named": true
   },
   {
     "type": "float",
-    "named": true
+    "named": false
   },
   {
     "type": "float32",

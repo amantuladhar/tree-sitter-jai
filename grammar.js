@@ -26,6 +26,11 @@ module.exports = grammar({
       $.enum_value_expr,
       $.struct_literal_expr,
     ],
+    [$.parameter_list, $.proc_return_expr],
+    [$.proc_return_type_expr, $.parameter],
+    [$.struct_field, $.assignment_expression],
+    [$.struct_field, $.assignment_expression, $.variable],
+    [$.struct_field, $.variable],
   ],
 
   word: ($) => $.identifier,
@@ -61,15 +66,19 @@ module.exports = grammar({
         field("body", $.struct_body),
         optional(";"),
       ),
-    struct_body: ($) => seq("{", optional(repeat($.struct_field)), "}"),
+    struct_body: ($) =>
+      seq("{", optional(repeat(choice($.struct_field, $._statement))), "}"),
+
     struct_field: ($) =>
-      seq(
-        field("name", $.identifier),
-        ":",
-        field("type", $._type),
-        optional(seq("=", field("default_value", $._expression))),
-        optional(","),
-        ";",
+      choice(
+        seq(
+          field("name", $.identifier),
+          ":",
+          field("type", $._type),
+          optional(seq("=", field("default_value", $._expression))),
+          optional(","), // @todo - remove this? Hmm... why did I add this?
+          ";",
+        ),
       ),
 
     enum_definition: ($) =>
@@ -103,26 +112,30 @@ module.exports = grammar({
       seq("(", optional(seq($.parameter, repeat(seq(",", $.parameter)))), ")"),
 
     proc_return_expr: ($) =>
-      seq(
-        "->",
-        optional("("),
-        optional(
-          seq(
-            $.proc_return_type_expr,
-            repeat(seq(",", $.proc_return_type_expr)),
+      prec.left(
+        seq(
+          "->",
+          optional("("),
+          optional(
+            seq(
+              $.proc_return_type_expr,
+              repeat(seq(",", $.proc_return_type_expr)),
+            ),
           ),
+          optional(")"),
         ),
-        optional(")"),
       ),
 
     proc_return_type_expr: ($) =>
-      choice(
-        field("type", $._type),
-        seq(
-          field("name", $.identifier),
-          ":",
+      prec.left(
+        choice(
           field("type", $._type),
-          optional(seq("=", field("default_value", $._expression))),
+          seq(
+            field("name", $.identifier),
+            ":",
+            field("type", $._type),
+            optional(seq("=", field("default_value", $._expression))),
+          ),
         ),
       ),
 
@@ -337,6 +350,17 @@ module.exports = grammar({
           seq("[", choice(optional($._expression), ".."), "]", $._type),
           // Pointer types
           seq("*", $._type),
+          $.proc_decl,
+        ),
+      ),
+
+    proc_decl: ($) =>
+      prec.left(
+        10,
+        seq(
+          $.parameter_list,
+          optional($.proc_return_expr),
+          optional(repeat($.directive)),
         ),
       ),
 
@@ -431,9 +455,11 @@ module.exports = grammar({
         ),
       ),
     enum_value_expr: ($) =>
-      choice(
-        seq($.identifier, ".", $.identifier),
-        seq(".", field("name", $.identifier)),
+      prec.left(
+        choice(
+          seq($.identifier, ".", $.identifier),
+          seq(".", field("name", $.identifier)),
+        ),
       ),
     struct_literal_expr: ($) =>
       seq(
