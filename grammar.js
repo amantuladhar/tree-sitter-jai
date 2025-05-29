@@ -93,6 +93,7 @@ module.exports = grammar({
       seq(
         field("name", $.identifier),
         "::",
+        optional(repeat(choice("inline"))),
         $.parameter_list,
         optional($.proc_return_expr),
         optional(repeat($.directive)),
