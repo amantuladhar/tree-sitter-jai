@@ -6,3 +6,7 @@ to_string :: inline (s: *u8, length: s64) -> string {  // We should probably dep
     result.data  = s;
     return result;
 }
+
+is_space :: (c: u8) -> bool {
+    return c == #char " " || c == #char "\t" || c == #char "\r" || c == #char "\n";
+}
