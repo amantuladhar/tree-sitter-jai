@@ -371,7 +371,7 @@ module.exports = grammar({
           optional("$"),
           field("name", $.identifier),
           ":=",
-          $._expression,
+          choice($._expression, "#caller_location"),
         ),
         seq(field("name", $.identifier), ":", "..", field("type", $._type)),
       ),

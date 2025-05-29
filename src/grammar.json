@@ -2215,8 +2215,17 @@
               "value": ":="
             },
             {
-              "type": "SYMBOL",
-              "name": "_expression"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_expression"
+                },
+                {
+                  "type": "STRING",
+                  "value": "#caller_location"
+                }
+              ]
             }
           ]
         },
