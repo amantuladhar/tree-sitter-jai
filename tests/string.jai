@@ -1,3 +1,6 @@
+assert_helper :: (message := "", args: .. Any, loc := #caller_location) -> bool {
+}
+
 to_string :: inline (s: *u8, length: s64) -> string {  // We should probably deprecate this in favor of your using string.{...}?
     if !s return "";
 

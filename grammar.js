@@ -366,6 +366,13 @@ module.exports = grammar({
           field("type", $._type),
           optional(seq("=", $._expression)),
         ),
+        seq(
+          optional($.using),
+          optional("$"),
+          field("name", $.identifier),
+          ":=",
+          $._expression,
+        ),
         seq(field("name", $.identifier), ":", "..", field("type", $._type)),
       ),
 
