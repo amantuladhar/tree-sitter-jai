@@ -52,7 +52,6 @@ module.exports = grammar({
           $.scope_export,
           $.if_directive,
           $.if_case_directive,
-          $.proc_decl,
         ),
       ),
     scope_module: ($) => seq("#scope_module", optional(";")),
