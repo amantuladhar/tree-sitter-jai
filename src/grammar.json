@@ -59,6 +59,10 @@
           {
             "type": "SYMBOL",
             "name": "if_case_directive"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "proc_decl"
           }
         ]
       }

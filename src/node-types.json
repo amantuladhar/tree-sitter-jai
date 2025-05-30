@@ -1953,6 +1953,10 @@
           "named": true
         },
         {
+          "type": "proc_decl",
+          "named": true
+        },
+        {
           "type": "proc_definition",
           "named": true
         },
@@ -2154,6 +2158,10 @@
             "named": true
           },
           {
+            "type": "proc_decl",
+            "named": true
+          },
+          {
             "type": "proc_definition",
             "named": true
           },
@@ -2265,6 +2273,10 @@
           },
           {
             "type": "insert_directive",
+            "named": true
+          },
+          {
+            "type": "proc_decl",
             "named": true
           },
           {
@@ -4174,6 +4186,10 @@
         },
         {
           "type": "import_directive",
+          "named": true
+        },
+        {
+          "type": "proc_decl",
           "named": true
         },
         {

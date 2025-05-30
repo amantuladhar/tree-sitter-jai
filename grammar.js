@@ -52,6 +52,7 @@ module.exports = grammar({
           $.scope_export,
           $.if_directive,
           $.if_case_directive,
+          $.proc_decl,
         ),
       ),
     scope_module: ($) => seq("#scope_module", optional(";")),
@@ -474,7 +475,7 @@ module.exports = grammar({
         ),
         "}",
         // @todo - this get picked up by variable so it has conflict
-        // maybe I need to construct this grammer differently so they don't have conflict
+        // maybe I need to construct this grammar differently so they don't have conflict
         // ";",
       ),
     struct_initialize_without_field: ($) =>
