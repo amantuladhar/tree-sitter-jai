@@ -1953,10 +1953,6 @@
           "named": true
         },
         {
-          "type": "proc_decl",
-          "named": true
-        },
-        {
           "type": "proc_definition",
           "named": true
         },
@@ -2158,10 +2154,6 @@
             "named": true
           },
           {
-            "type": "proc_decl",
-            "named": true
-          },
-          {
             "type": "proc_definition",
             "named": true
           },
@@ -2273,10 +2265,6 @@
           },
           {
             "type": "insert_directive",
-            "named": true
-          },
-          {
-            "type": "proc_decl",
             "named": true
           },
           {
@@ -4189,10 +4177,6 @@
           "named": true
         },
         {
-          "type": "proc_decl",
-          "named": true
-        },
-        {
           "type": "proc_definition",
           "named": true
         },
@@ -5330,6 +5314,10 @@
     "named": false
   },
   {
+    "type": "#complete",
+    "named": false
+  },
+  {
     "type": "#if",
     "named": false
   },
@@ -5548,11 +5536,11 @@
   },
   {
     "type": "float",
-    "named": true
+    "named": false
   },
   {
     "type": "float",
-    "named": false
+    "named": true
   },
   {
     "type": "float32",

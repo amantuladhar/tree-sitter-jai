@@ -192,7 +192,14 @@ module.exports = grammar({
         ),
       ),
 
-    if_case: ($) => seq("if", field("condition", $._expression), "==", $.block),
+    if_case: ($) =>
+      seq(
+        "if",
+        optional(seq("#complete")),
+        field("condition", $._expression),
+        "==",
+        $.block,
+      ),
 
     if_case_directive: ($) =>
       prec.right(

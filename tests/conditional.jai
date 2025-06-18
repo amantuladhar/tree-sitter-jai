@@ -7,6 +7,11 @@
 }
 
 test :: () {
+    if #complete type == {
+        case .DECL; resolve_decl(it.as.decl, *new_scope, error_reporter);
+        case .STMT; resolve_stmt(it.as.stmt, *new_scope, error_reporter);
+    }
+
     #if OS == {
         case .LINUX;
             POSIX.close(ev.evl_queue_fd);
