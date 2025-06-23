@@ -59,6 +59,10 @@
           {
             "type": "SYMBOL",
             "name": "if_case_directive"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "run_directive"
           }
         ]
       }
@@ -333,6 +337,59 @@
           ]
         },
         {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": "int"
+                  },
+                  {
+                    "type": "STRING",
+                    "value": "s64"
+                  },
+                  {
+                    "type": "STRING",
+                    "value": "u64"
+                  },
+                  {
+                    "type": "STRING",
+                    "value": "s32"
+                  },
+                  {
+                    "type": "STRING",
+                    "value": "u32"
+                  },
+                  {
+                    "type": "STRING",
+                    "value": "s16"
+                  },
+                  {
+                    "type": "STRING",
+                    "value": "u16"
+                  },
+                  {
+                    "type": "STRING",
+                    "value": "s8"
+                  },
+                  {
+                    "type": "STRING",
+                    "value": "u8"
+                  }
+                ]
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
           "type": "FIELD",
           "name": "body",
           "content": {
@@ -364,8 +421,17 @@
         {
           "type": "REPEAT",
           "content": {
-            "type": "SYMBOL",
-            "name": "enum_values"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "enum_values"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_definition"
+              }
+            ]
           }
         },
         {
@@ -821,6 +887,10 @@
         {
           "type": "SYMBOL",
           "name": "assert_directive"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "run_directive"
         }
       ]
     },
@@ -1102,25 +1172,20 @@
                 "value": "{"
               },
               {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "REPEAT",
-                    "content": {
-                      "type": "CHOICE",
-                      "members": [
-                        {
-                          "type": "SYMBOL",
-                          "name": "_statement"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "_definition"
-                        }
-                      ]
+                "type": "REPEAT",
+                "content": {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "_statement"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "_definition"
                     }
-                  }
-                ]
+                  ]
+                }
               },
               {
                 "type": "STRING",
@@ -1788,6 +1853,31 @@
         }
       ]
     },
+    "named_argument": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "="
+        },
+        {
+          "type": "FIELD",
+          "name": "value",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_expression"
+          }
+        }
+      ]
+    },
     "argument_list": {
       "type": "SEQ",
       "members": [
@@ -1811,8 +1901,17 @@
                           "type": "SEQ",
                           "members": [
                             {
-                              "type": "SYMBOL",
-                              "name": "_expression"
+                              "type": "CHOICE",
+                              "members": [
+                                {
+                                  "type": "SYMBOL",
+                                  "name": "_expression"
+                                },
+                                {
+                                  "type": "SYMBOL",
+                                  "name": "named_argument"
+                                }
+                              ]
                             },
                             {
                               "type": "REPEAT",
@@ -1824,8 +1923,17 @@
                                     "value": ","
                                   },
                                   {
-                                    "type": "SYMBOL",
-                                    "name": "_expression"
+                                    "type": "CHOICE",
+                                    "members": [
+                                      {
+                                        "type": "SYMBOL",
+                                        "name": "_expression"
+                                      },
+                                      {
+                                        "type": "SYMBOL",
+                                        "name": "named_argument"
+                                      }
+                                    ]
                                   }
                                 ]
                               }
@@ -2023,6 +2131,23 @@
                 "name": "struct_body"
               }
             ]
+          },
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "identifier"
+              },
+              {
+                "type": "STRING",
+                "value": "."
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_type"
+              }
+            ]
           }
         ]
       }
@@ -2153,6 +2278,40 @@
         {
           "type": "SYMBOL",
           "name": "block"
+        }
+      ]
+    },
+    "run_directive": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "#run"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "block"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_expression"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": ";"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
@@ -2419,23 +2578,6 @@
         }
       ]
     },
-    "varargs": {
-      "type": "PREC",
-      "value": 5,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "STRING",
-            "value": ".."
-          },
-          {
-            "type": "SYMBOL",
-            "name": "identifier"
-          }
-        ]
-      }
-    },
     "import_directive": {
       "type": "SEQ",
       "members": [
@@ -2640,6 +2782,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "array_literal_expr"
+        },
+        {
+          "type": "SYMBOL",
           "name": "enum_value_expr"
         },
         {
@@ -2676,7 +2822,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "varargs"
+          "name": "directive"
         }
       ]
     },
@@ -2754,7 +2900,7 @@
     },
     "range_expr": {
       "type": "PREC_RIGHT",
-      "value": 3,
+      "value": 6,
       "content": {
         "type": "SEQ",
         "members": [
@@ -2769,6 +2915,23 @@
           {
             "type": "SYMBOL",
             "name": "_expression"
+          }
+        ]
+      }
+    },
+    "varargs": {
+      "type": "PREC",
+      "value": 5,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": ".."
+          },
+          {
+            "type": "SYMBOL",
+            "name": "identifier"
           }
         ]
       }
@@ -2921,6 +3084,68 @@
         }
       ]
     },
+    "array_literal_expr": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "identifier"
+                },
+                {
+                  "type": "REPEAT",
+                  "content": {
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "STRING",
+                        "value": "."
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "identifier"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "."
+        },
+        {
+          "type": "STRING",
+          "value": "["
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_expression"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "]"
+        }
+      ]
+    },
     "struct_initialize_without_field": {
       "type": "SEQ",
       "members": [
@@ -3027,6 +3252,22 @@
                 {
                   "type": "STRING",
                   "value": "+"
+                },
+                {
+                  "type": "STRING",
+                  "value": "+="
+                },
+                {
+                  "type": "STRING",
+                  "value": "-="
+                },
+                {
+                  "type": "STRING",
+                  "value": "*="
+                },
+                {
+                  "type": "STRING",
+                  "value": "/="
                 },
                 {
                   "type": "STRING",
@@ -3345,6 +3586,33 @@
     [
       "struct_field",
       "variable"
+    ],
+    [
+      "_statement",
+      "_expression"
+    ],
+    [
+      "enum_values",
+      "constant"
+    ],
+    [
+      "proc_call_expr",
+      "_expression",
+      "dereference",
+      "enum_value_expr",
+      "struct_literal_expr",
+      "array_literal_expr"
+    ],
+    [
+      "proc_call_expr",
+      "enum_value_expr",
+      "struct_literal_expr",
+      "array_literal_expr"
+    ],
+    [
+      "enum_value_expr",
+      "struct_literal_expr",
+      "array_literal_expr"
     ]
   ],
   "precedences": [],

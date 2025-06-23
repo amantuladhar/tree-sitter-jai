@@ -12,6 +12,10 @@
           "named": true
         },
         {
+          "type": "array_literal_expr",
+          "named": true
+        },
+        {
           "type": "auto_cast_expr",
           "named": true
         },
@@ -32,6 +36,10 @@
           "named": true
         },
         {
+          "type": "directive",
+          "named": true
+        },
+        {
           "type": "enum_value_expr",
           "named": true
         },
@@ -49,6 +57,10 @@
         },
         {
           "type": "member_access_expr",
+          "named": true
+        },
+        {
+          "type": "named_argument",
           "named": true
         },
         {
@@ -107,6 +119,10 @@
           "named": true
         },
         {
+          "type": "array_literal_expr",
+          "named": true
+        },
+        {
           "type": "auto_cast_expr",
           "named": true
         },
@@ -124,6 +140,10 @@
         },
         {
           "type": "dereference",
+          "named": true
+        },
+        {
+          "type": "directive",
           "named": true
         },
         {
@@ -181,9 +201,104 @@
         {
           "type": "undefined",
           "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "array_literal_expr",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "array_access",
+          "named": true
         },
         {
-          "type": "varargs",
+          "type": "array_literal_expr",
+          "named": true
+        },
+        {
+          "type": "auto_cast_expr",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "char_expr",
+          "named": true
+        },
+        {
+          "type": "dereference",
+          "named": true
+        },
+        {
+          "type": "directive",
+          "named": true
+        },
+        {
+          "type": "enum_value_expr",
+          "named": true
+        },
+        {
+          "type": "float",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "ifx_expr",
+          "named": true
+        },
+        {
+          "type": "member_access_expr",
+          "named": true
+        },
+        {
+          "type": "null",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "proc_call_expr",
+          "named": true
+        },
+        {
+          "type": "range_expr",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "struct_literal_expr",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "undefined",
           "named": true
         }
       ]
@@ -215,6 +330,10 @@
         "types": [
           {
             "type": "*",
+            "named": false
+          },
+          {
+            "type": ".",
             "named": false
           },
           {
@@ -250,6 +369,10 @@
             "named": true
           },
           {
+            "type": "array_literal_expr",
+            "named": true
+          },
+          {
             "type": "auto_cast_expr",
             "named": true
           },
@@ -271,6 +394,10 @@
           },
           {
             "type": "dereference",
+            "named": true
+          },
+          {
+            "type": "directive",
             "named": true
           },
           {
@@ -394,10 +521,6 @@
             "named": true
           },
           {
-            "type": "varargs",
-            "named": true
-          },
-          {
             "type": "void",
             "named": false
           }
@@ -442,6 +565,10 @@
             "named": true
           },
           {
+            "type": "array_literal_expr",
+            "named": true
+          },
+          {
             "type": "auto_cast_expr",
             "named": true
           },
@@ -459,6 +586,10 @@
           },
           {
             "type": "dereference",
+            "named": true
+          },
+          {
+            "type": "directive",
             "named": true
           },
           {
@@ -516,10 +647,6 @@
           {
             "type": "undefined",
             "named": true
-          },
-          {
-            "type": "varargs",
-            "named": true
           }
         ]
       }
@@ -535,6 +662,10 @@
       "types": [
         {
           "type": "array_access",
+          "named": true
+        },
+        {
+          "type": "array_literal_expr",
           "named": true
         },
         {
@@ -555,6 +686,10 @@
         },
         {
           "type": "dereference",
+          "named": true
+        },
+        {
+          "type": "directive",
           "named": true
         },
         {
@@ -612,10 +747,6 @@
         {
           "type": "undefined",
           "named": true
-        },
-        {
-          "type": "varargs",
-          "named": true
         }
       ]
     }
@@ -630,6 +761,10 @@
         "types": [
           {
             "type": "array_access",
+            "named": true
+          },
+          {
+            "type": "array_literal_expr",
             "named": true
           },
           {
@@ -650,6 +785,10 @@
           },
           {
             "type": "dereference",
+            "named": true
+          },
+          {
+            "type": "directive",
             "named": true
           },
           {
@@ -707,10 +846,6 @@
           {
             "type": "undefined",
             "named": true
-          },
-          {
-            "type": "varargs",
-            "named": true
           }
         ]
       },
@@ -739,7 +874,15 @@
             "named": false
           },
           {
+            "type": "*=",
+            "named": false
+          },
+          {
             "type": "+",
+            "named": false
+          },
+          {
+            "type": "+=",
             "named": false
           },
           {
@@ -747,7 +890,15 @@
             "named": false
           },
           {
+            "type": "-=",
+            "named": false
+          },
+          {
             "type": "/",
+            "named": false
+          },
+          {
+            "type": "/=",
             "named": false
           },
           {
@@ -801,6 +952,10 @@
             "named": true
           },
           {
+            "type": "array_literal_expr",
+            "named": true
+          },
+          {
             "type": "auto_cast_expr",
             "named": true
           },
@@ -818,6 +973,10 @@
           },
           {
             "type": "dereference",
+            "named": true
+          },
+          {
+            "type": "directive",
             "named": true
           },
           {
@@ -874,10 +1033,6 @@
           },
           {
             "type": "undefined",
-            "named": true
-          },
-          {
-            "type": "varargs",
             "named": true
           }
         ]
@@ -953,6 +1108,10 @@
           "named": true
         },
         {
+          "type": "run_directive",
+          "named": true
+        },
+        {
           "type": "using_statement",
           "named": true
         },
@@ -1011,6 +1170,10 @@
           "named": true
         },
         {
+          "type": "array_literal_expr",
+          "named": true
+        },
+        {
           "type": "auto_cast_expr",
           "named": true
         },
@@ -1028,6 +1191,10 @@
         },
         {
           "type": "dereference",
+          "named": true
+        },
+        {
+          "type": "directive",
           "named": true
         },
         {
@@ -1084,10 +1251,6 @@
         },
         {
           "type": "undefined",
-          "named": true
-        },
-        {
-          "type": "varargs",
           "named": true
         }
       ]
@@ -1147,6 +1310,10 @@
           "named": true
         },
         {
+          "type": "array_literal_expr",
+          "named": true
+        },
+        {
           "type": "auto_cast_expr",
           "named": true
         },
@@ -1168,6 +1335,10 @@
         },
         {
           "type": "dereference",
+          "named": true
+        },
+        {
+          "type": "directive",
           "named": true
         },
         {
@@ -1232,10 +1403,6 @@
         },
         {
           "type": "undefined",
-          "named": true
-        },
-        {
-          "type": "varargs",
           "named": true
         }
       ]
@@ -1304,7 +1471,55 @@
       "required": false,
       "types": [
         {
+          "type": "constant",
+          "named": true
+        },
+        {
+          "type": "enum_definition",
+          "named": true
+        },
+        {
           "type": "enum_values",
+          "named": true
+        },
+        {
+          "type": "if_case_directive",
+          "named": true
+        },
+        {
+          "type": "if_directive",
+          "named": true
+        },
+        {
+          "type": "import_directive",
+          "named": true
+        },
+        {
+          "type": "proc_definition",
+          "named": true
+        },
+        {
+          "type": "run_directive",
+          "named": true
+        },
+        {
+          "type": "scope_export",
+          "named": true
+        },
+        {
+          "type": "scope_file",
+          "named": true
+        },
+        {
+          "type": "scope_module",
+          "named": true
+        },
+        {
+          "type": "struct_definition",
+          "named": true
+        },
+        {
+          "type": "variable",
           "named": true
         }
       ]
@@ -1331,6 +1546,48 @@
           {
             "type": "identifier",
             "named": true
+          }
+        ]
+      },
+      "type": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "int",
+            "named": false
+          },
+          {
+            "type": "s16",
+            "named": false
+          },
+          {
+            "type": "s32",
+            "named": false
+          },
+          {
+            "type": "s64",
+            "named": false
+          },
+          {
+            "type": "s8",
+            "named": false
+          },
+          {
+            "type": "u16",
+            "named": false
+          },
+          {
+            "type": "u32",
+            "named": false
+          },
+          {
+            "type": "u64",
+            "named": false
+          },
+          {
+            "type": "u8",
+            "named": false
           }
         ]
       }
@@ -1395,6 +1652,10 @@
             "named": true
           },
           {
+            "type": "array_literal_expr",
+            "named": true
+          },
+          {
             "type": "auto_cast_expr",
             "named": true
           },
@@ -1412,6 +1673,10 @@
           },
           {
             "type": "dereference",
+            "named": true
+          },
+          {
+            "type": "directive",
             "named": true
           },
           {
@@ -1469,10 +1734,6 @@
           {
             "type": "undefined",
             "named": true
-          },
-          {
-            "type": "varargs",
-            "named": true
           }
         ]
       }
@@ -1488,6 +1749,10 @@
       "types": [
         {
           "type": "array_access",
+          "named": true
+        },
+        {
+          "type": "array_literal_expr",
           "named": true
         },
         {
@@ -1512,6 +1777,10 @@
         },
         {
           "type": "dereference",
+          "named": true
+        },
+        {
+          "type": "directive",
           "named": true
         },
         {
@@ -1568,10 +1837,6 @@
         },
         {
           "type": "undefined",
-          "named": true
-        },
-        {
-          "type": "varargs",
           "named": true
         }
       ]
@@ -1646,6 +1911,10 @@
             "named": true
           },
           {
+            "type": "run_directive",
+            "named": true
+          },
+          {
             "type": "using_statement",
             "named": true
           },
@@ -1669,6 +1938,10 @@
           "named": true
         },
         {
+          "type": "array_literal_expr",
+          "named": true
+        },
+        {
           "type": "auto_cast_expr",
           "named": true
         },
@@ -1686,6 +1959,10 @@
         },
         {
           "type": "dereference",
+          "named": true
+        },
+        {
+          "type": "directive",
           "named": true
         },
         {
@@ -1743,10 +2020,6 @@
         {
           "type": "undefined",
           "named": true
-        },
-        {
-          "type": "varargs",
-          "named": true
         }
       ]
     }
@@ -1761,6 +2034,10 @@
         "types": [
           {
             "type": "array_access",
+            "named": true
+          },
+          {
+            "type": "array_literal_expr",
             "named": true
           },
           {
@@ -1781,6 +2058,10 @@
           },
           {
             "type": "dereference",
+            "named": true
+          },
+          {
+            "type": "directive",
             "named": true
           },
           {
@@ -1837,10 +2118,6 @@
           },
           {
             "type": "undefined",
-            "named": true
-          },
-          {
-            "type": "varargs",
             "named": true
           }
         ]
@@ -1870,6 +2147,10 @@
             "named": true
           },
           {
+            "type": "array_literal_expr",
+            "named": true
+          },
+          {
             "type": "auto_cast_expr",
             "named": true
           },
@@ -1887,6 +2168,10 @@
           },
           {
             "type": "dereference",
+            "named": true
+          },
+          {
+            "type": "directive",
             "named": true
           },
           {
@@ -1943,10 +2228,6 @@
           },
           {
             "type": "undefined",
-            "named": true
-          },
-          {
-            "type": "varargs",
             "named": true
           }
         ]
@@ -2029,6 +2310,10 @@
           "named": true
         },
         {
+          "type": "run_directive",
+          "named": true
+        },
+        {
           "type": "scope_export",
           "named": true
         },
@@ -2072,6 +2357,10 @@
             "named": true
           },
           {
+            "type": "array_literal_expr",
+            "named": true
+          },
+          {
             "type": "auto_cast_expr",
             "named": true
           },
@@ -2089,6 +2378,10 @@
           },
           {
             "type": "dereference",
+            "named": true
+          },
+          {
+            "type": "directive",
             "named": true
           },
           {
@@ -2145,10 +2438,6 @@
           },
           {
             "type": "undefined",
-            "named": true
-          },
-          {
-            "type": "varargs",
             "named": true
           }
         ]
@@ -2231,6 +2520,10 @@
           },
           {
             "type": "return_statement",
+            "named": true
+          },
+          {
+            "type": "run_directive",
             "named": true
           },
           {
@@ -2345,6 +2638,10 @@
           },
           {
             "type": "return_statement",
+            "named": true
+          },
+          {
+            "type": "run_directive",
             "named": true
           },
           {
@@ -2392,6 +2689,10 @@
             "named": true
           },
           {
+            "type": "array_literal_expr",
+            "named": true
+          },
+          {
             "type": "auto_cast_expr",
             "named": true
           },
@@ -2409,6 +2710,10 @@
           },
           {
             "type": "dereference",
+            "named": true
+          },
+          {
+            "type": "directive",
             "named": true
           },
           {
@@ -2465,10 +2770,6 @@
           },
           {
             "type": "undefined",
-            "named": true
-          },
-          {
-            "type": "varargs",
             "named": true
           }
         ]
@@ -2535,6 +2836,10 @@
           },
           {
             "type": "return_statement",
+            "named": true
+          },
+          {
+            "type": "run_directive",
             "named": true
           },
           {
@@ -2613,6 +2918,10 @@
           },
           {
             "type": "return_statement",
+            "named": true
+          },
+          {
+            "type": "run_directive",
             "named": true
           },
           {
@@ -2644,6 +2953,10 @@
             "named": true
           },
           {
+            "type": "array_literal_expr",
+            "named": true
+          },
+          {
             "type": "auto_cast_expr",
             "named": true
           },
@@ -2661,6 +2974,10 @@
           },
           {
             "type": "dereference",
+            "named": true
+          },
+          {
+            "type": "directive",
             "named": true
           },
           {
@@ -2717,10 +3034,6 @@
           },
           {
             "type": "undefined",
-            "named": true
-          },
-          {
-            "type": "varargs",
             "named": true
           }
         ]
@@ -2734,6 +3047,10 @@
             "named": true
           },
           {
+            "type": "array_literal_expr",
+            "named": true
+          },
+          {
             "type": "auto_cast_expr",
             "named": true
           },
@@ -2751,6 +3068,10 @@
           },
           {
             "type": "dereference",
+            "named": true
+          },
+          {
+            "type": "directive",
             "named": true
           },
           {
@@ -2807,10 +3128,6 @@
           },
           {
             "type": "undefined",
-            "named": true
-          },
-          {
-            "type": "varargs",
             "named": true
           }
         ]
@@ -2838,6 +3155,10 @@
             "named": true
           },
           {
+            "type": "array_literal_expr",
+            "named": true
+          },
+          {
             "type": "auto_cast_expr",
             "named": true
           },
@@ -2855,6 +3176,10 @@
           },
           {
             "type": "dereference",
+            "named": true
+          },
+          {
+            "type": "directive",
             "named": true
           },
           {
@@ -2911,10 +3236,6 @@
           },
           {
             "type": "undefined",
-            "named": true
-          },
-          {
-            "type": "varargs",
             "named": true
           }
         ]
@@ -2955,6 +3276,10 @@
           "named": true
         },
         {
+          "type": "array_literal_expr",
+          "named": true
+        },
+        {
           "type": "auto_cast_expr",
           "named": true
         },
@@ -2972,6 +3297,10 @@
         },
         {
           "type": "dereference",
+          "named": true
+        },
+        {
+          "type": "directive",
           "named": true
         },
         {
@@ -3029,10 +3358,6 @@
         {
           "type": "undefined",
           "named": true
-        },
-        {
-          "type": "varargs",
-          "named": true
         }
       ]
     }
@@ -3065,6 +3390,10 @@
             "named": true
           },
           {
+            "type": "array_literal_expr",
+            "named": true
+          },
+          {
             "type": "auto_cast_expr",
             "named": true
           },
@@ -3082,6 +3411,10 @@
           },
           {
             "type": "dereference",
+            "named": true
+          },
+          {
+            "type": "directive",
             "named": true
           },
           {
@@ -3139,10 +3472,6 @@
           {
             "type": "undefined",
             "named": true
-          },
-          {
-            "type": "varargs",
-            "named": true
           }
         ]
       },
@@ -3152,6 +3481,116 @@
         "types": [
           {
             "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "named_argument",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "array_access",
+            "named": true
+          },
+          {
+            "type": "array_literal_expr",
+            "named": true
+          },
+          {
+            "type": "auto_cast_expr",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean",
+            "named": true
+          },
+          {
+            "type": "char_expr",
+            "named": true
+          },
+          {
+            "type": "dereference",
+            "named": true
+          },
+          {
+            "type": "directive",
+            "named": true
+          },
+          {
+            "type": "enum_value_expr",
+            "named": true
+          },
+          {
+            "type": "float",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "ifx_expr",
+            "named": true
+          },
+          {
+            "type": "member_access_expr",
+            "named": true
+          },
+          {
+            "type": "null",
+            "named": true
+          },
+          {
+            "type": "number",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "proc_call_expr",
+            "named": true
+          },
+          {
+            "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          },
+          {
+            "type": "struct_literal_expr",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "undefined",
             "named": true
           }
         ]
@@ -3182,6 +3621,10 @@
           "named": true
         },
         {
+          "type": "array_literal_expr",
+          "named": true
+        },
+        {
           "type": "auto_cast_expr",
           "named": true
         },
@@ -3199,6 +3642,10 @@
         },
         {
           "type": "dereference",
+          "named": true
+        },
+        {
+          "type": "directive",
           "named": true
         },
         {
@@ -3256,10 +3703,6 @@
         {
           "type": "undefined",
           "named": true
-        },
-        {
-          "type": "varargs",
-          "named": true
         }
       ]
     }
@@ -3284,6 +3727,10 @@
         "types": [
           {
             "type": "*",
+            "named": false
+          },
+          {
+            "type": ".",
             "named": false
           },
           {
@@ -3315,6 +3762,10 @@
             "named": true
           },
           {
+            "type": "array_literal_expr",
+            "named": true
+          },
+          {
             "type": "auto_cast_expr",
             "named": true
           },
@@ -3336,6 +3787,10 @@
           },
           {
             "type": "dereference",
+            "named": true
+          },
+          {
+            "type": "directive",
             "named": true
           },
           {
@@ -3459,10 +3914,6 @@
             "named": true
           },
           {
-            "type": "varargs",
-            "named": true
-          },
-          {
             "type": "void",
             "named": false
           }
@@ -3475,6 +3926,10 @@
       "types": [
         {
           "type": "array_access",
+          "named": true
+        },
+        {
+          "type": "array_literal_expr",
           "named": true
         },
         {
@@ -3495,6 +3950,10 @@
         },
         {
           "type": "dereference",
+          "named": true
+        },
+        {
+          "type": "directive",
           "named": true
         },
         {
@@ -3556,10 +4015,6 @@
         {
           "type": "using",
           "named": true
-        },
-        {
-          "type": "varargs",
-          "named": true
         }
       ]
     }
@@ -3592,6 +4047,10 @@
           "named": true
         },
         {
+          "type": "array_literal_expr",
+          "named": true
+        },
+        {
           "type": "auto_cast_expr",
           "named": true
         },
@@ -3609,6 +4068,10 @@
         },
         {
           "type": "dereference",
+          "named": true
+        },
+        {
+          "type": "directive",
           "named": true
         },
         {
@@ -3665,10 +4128,6 @@
         },
         {
           "type": "undefined",
-          "named": true
-        },
-        {
-          "type": "varargs",
           "named": true
         }
       ]
@@ -3799,6 +4258,10 @@
             "named": true
           },
           {
+            "type": "array_literal_expr",
+            "named": true
+          },
+          {
             "type": "auto_cast_expr",
             "named": true
           },
@@ -3816,6 +4279,10 @@
           },
           {
             "type": "dereference",
+            "named": true
+          },
+          {
+            "type": "directive",
             "named": true
           },
           {
@@ -3873,10 +4340,6 @@
           {
             "type": "undefined",
             "named": true
-          },
-          {
-            "type": "varargs",
-            "named": true
           }
         ]
       },
@@ -3896,6 +4359,10 @@
         "types": [
           {
             "type": "*",
+            "named": false
+          },
+          {
+            "type": ".",
             "named": false
           },
           {
@@ -3927,6 +4394,10 @@
             "named": true
           },
           {
+            "type": "array_literal_expr",
+            "named": true
+          },
+          {
             "type": "auto_cast_expr",
             "named": true
           },
@@ -3948,6 +4419,10 @@
           },
           {
             "type": "dereference",
+            "named": true
+          },
+          {
+            "type": "directive",
             "named": true
           },
           {
@@ -4071,10 +4546,6 @@
             "named": true
           },
           {
-            "type": "varargs",
-            "named": true
-          },
-          {
             "type": "void",
             "named": false
           }
@@ -4095,6 +4566,10 @@
           "named": true
         },
         {
+          "type": "array_literal_expr",
+          "named": true
+        },
+        {
           "type": "auto_cast_expr",
           "named": true
         },
@@ -4112,6 +4587,10 @@
         },
         {
           "type": "dereference",
+          "named": true
+        },
+        {
+          "type": "directive",
           "named": true
         },
         {
@@ -4169,10 +4648,6 @@
         {
           "type": "undefined",
           "named": true
-        },
-        {
-          "type": "varargs",
-          "named": true
         }
       ]
     }
@@ -4187,6 +4662,10 @@
       "types": [
         {
           "type": "array_access",
+          "named": true
+        },
+        {
+          "type": "array_literal_expr",
           "named": true
         },
         {
@@ -4207,6 +4686,10 @@
         },
         {
           "type": "dereference",
+          "named": true
+        },
+        {
+          "type": "directive",
           "named": true
         },
         {
@@ -4268,9 +4751,108 @@
         {
           "type": "undefined",
           "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "run_directive",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "array_access",
+          "named": true
         },
         {
-          "type": "varargs",
+          "type": "array_literal_expr",
+          "named": true
+        },
+        {
+          "type": "auto_cast_expr",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "block",
+          "named": true
+        },
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "char_expr",
+          "named": true
+        },
+        {
+          "type": "dereference",
+          "named": true
+        },
+        {
+          "type": "directive",
+          "named": true
+        },
+        {
+          "type": "enum_value_expr",
+          "named": true
+        },
+        {
+          "type": "float",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "ifx_expr",
+          "named": true
+        },
+        {
+          "type": "member_access_expr",
+          "named": true
+        },
+        {
+          "type": "null",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "proc_call_expr",
+          "named": true
+        },
+        {
+          "type": "range_expr",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "struct_literal_expr",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "undefined",
           "named": true
         }
       ]
@@ -4322,6 +4904,10 @@
         },
         {
           "type": "proc_definition",
+          "named": true
+        },
+        {
+          "type": "run_directive",
           "named": true
         },
         {
@@ -4423,6 +5009,10 @@
           "named": true
         },
         {
+          "type": "run_directive",
+          "named": true
+        },
+        {
           "type": "struct_field",
           "named": true
         },
@@ -4480,6 +5070,10 @@
             "named": true
           },
           {
+            "type": "array_literal_expr",
+            "named": true
+          },
+          {
             "type": "auto_cast_expr",
             "named": true
           },
@@ -4497,6 +5091,10 @@
           },
           {
             "type": "dereference",
+            "named": true
+          },
+          {
+            "type": "directive",
             "named": true
           },
           {
@@ -4554,10 +5152,6 @@
           {
             "type": "undefined",
             "named": true
-          },
-          {
-            "type": "varargs",
-            "named": true
           }
         ]
       },
@@ -4577,6 +5171,10 @@
         "types": [
           {
             "type": "*",
+            "named": false
+          },
+          {
+            "type": ".",
             "named": false
           },
           {
@@ -4608,6 +5206,10 @@
             "named": true
           },
           {
+            "type": "array_literal_expr",
+            "named": true
+          },
+          {
             "type": "auto_cast_expr",
             "named": true
           },
@@ -4629,6 +5231,10 @@
           },
           {
             "type": "dereference",
+            "named": true
+          },
+          {
+            "type": "directive",
             "named": true
           },
           {
@@ -4756,10 +5362,6 @@
             "named": true
           },
           {
-            "type": "varargs",
-            "named": true
-          },
-          {
             "type": "void",
             "named": false
           }
@@ -4780,6 +5382,10 @@
           "named": true
         },
         {
+          "type": "array_literal_expr",
+          "named": true
+        },
+        {
           "type": "auto_cast_expr",
           "named": true
         },
@@ -4797,6 +5403,10 @@
         },
         {
           "type": "dereference",
+          "named": true
+        },
+        {
+          "type": "directive",
           "named": true
         },
         {
@@ -4853,10 +5463,6 @@
         },
         {
           "type": "undefined",
-          "named": true
-        },
-        {
-          "type": "varargs",
           "named": true
         }
       ]
@@ -4875,6 +5481,10 @@
           "named": true
         },
         {
+          "type": "array_literal_expr",
+          "named": true
+        },
+        {
           "type": "auto_cast_expr",
           "named": true
         },
@@ -4892,6 +5502,10 @@
         },
         {
           "type": "dereference",
+          "named": true
+        },
+        {
+          "type": "directive",
           "named": true
         },
         {
@@ -4948,10 +5562,6 @@
         },
         {
           "type": "undefined",
-          "named": true
-        },
-        {
-          "type": "varargs",
           "named": true
         }
       ]
@@ -4993,6 +5603,10 @@
             "named": true
           },
           {
+            "type": "array_literal_expr",
+            "named": true
+          },
+          {
             "type": "auto_cast_expr",
             "named": true
           },
@@ -5010,6 +5624,10 @@
           },
           {
             "type": "dereference",
+            "named": true
+          },
+          {
+            "type": "directive",
             "named": true
           },
           {
@@ -5066,10 +5684,6 @@
           },
           {
             "type": "undefined",
-            "named": true
-          },
-          {
-            "type": "varargs",
             "named": true
           }
         ]
@@ -5160,6 +5774,10 @@
         },
         {
           "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "run_directive",
           "named": true
         },
         {
@@ -5262,6 +5880,10 @@
           "named": true
         },
         {
+          "type": "run_directive",
+          "named": true
+        },
+        {
           "type": "using_statement",
           "named": true
         },
@@ -5304,6 +5926,10 @@
           "named": true
         },
         {
+          "type": "array_literal_expr",
+          "named": true
+        },
+        {
           "type": "auto_cast_expr",
           "named": true
         },
@@ -5321,6 +5947,10 @@
         },
         {
           "type": "dereference",
+          "named": true
+        },
+        {
+          "type": "directive",
           "named": true
         },
         {
@@ -5385,10 +6015,6 @@
         },
         {
           "type": "undefined",
-          "named": true
-        },
-        {
-          "type": "varargs",
           "named": true
         }
       ]
@@ -5463,6 +6089,10 @@
             "named": true
           },
           {
+            "type": "run_directive",
+            "named": true
+          },
+          {
             "type": "using_statement",
             "named": true
           },
@@ -5485,6 +6115,10 @@
             "named": true
           },
           {
+            "type": "array_literal_expr",
+            "named": true
+          },
+          {
             "type": "auto_cast_expr",
             "named": true
           },
@@ -5502,6 +6136,10 @@
           },
           {
             "type": "dereference",
+            "named": true
+          },
+          {
+            "type": "directive",
             "named": true
           },
           {
@@ -5558,10 +6196,6 @@
           },
           {
             "type": "undefined",
-            "named": true
-          },
-          {
-            "type": "varargs",
             "named": true
           }
         ]
@@ -5628,6 +6262,10 @@
   },
   {
     "type": "#load",
+    "named": false
+  },
+  {
+    "type": "#run",
     "named": false
   },
   {

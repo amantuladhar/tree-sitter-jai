@@ -31,6 +31,23 @@ module.exports = grammar({
     [$.struct_field, $.assignment_expression],
     [$.struct_field, $.assignment_expression, $.variable],
     [$.struct_field, $.variable],
+    [$._statement, $._expression],
+    [$.enum_values, $.constant],
+    [
+      $.proc_call_expr,
+      $._expression,
+      $.dereference,
+      $.enum_value_expr,
+      $.struct_literal_expr,
+      $.array_literal_expr,
+    ],
+    [
+      $.proc_call_expr,
+      $.enum_value_expr,
+      $.struct_literal_expr,
+      $.array_literal_expr,
+    ],
+    [$.enum_value_expr, $.struct_literal_expr, $.array_literal_expr],
   ],
 
   word: ($) => $.identifier,
@@ -52,6 +69,7 @@ module.exports = grammar({
           $.scope_export,
           $.if_directive,
           $.if_case_directive,
+          $.run_directive,
         ),
       ),
     scope_module: ($) => seq("#scope_module", optional(";")),
@@ -92,15 +110,23 @@ module.exports = grammar({
         "::",
         choice("enum", "enum_flags"),
         optional($.directive),
+        optional(
+          field(
+            "type",
+            choice("int", "s64", "u64", "s32", "u32", "s16", "u16", "s8", "u8"),
+          ),
+        ),
         field("body", $.enum_body),
         optional(";"),
       ),
-    enum_body: ($) => seq("{", repeat($.enum_values), "}"),
+    enum_body: ($) =>
+      seq("{", repeat(choice($.enum_values, $._definition)), "}"),
 
     union_definition: ($) => seq("union", $.union_body),
 
     union_body: ($) =>
       seq("{", repeat(choice($.struct_field, $._statement)), "}"),
+
     enum_values: ($) =>
       seq(
         field("name", $.identifier),
@@ -174,6 +200,7 @@ module.exports = grammar({
         $.using_statement,
         $.insert_directive,
         $.assert_directive,
+        $.run_directive,
       ),
     case_statement: ($) =>
       seq(
@@ -217,7 +244,7 @@ module.exports = grammar({
           "#if",
           field("condition", $._expression),
           "==",
-          seq("{", seq(repeat(choice($._statement, $._definition))), "}"),
+          seq("{", repeat(choice($._statement, $._definition)), "}"),
         ),
       ),
 
@@ -323,6 +350,8 @@ module.exports = grammar({
         field("function", $.identifier),
         field("arguments", $.argument_list),
       ),
+    named_argument: ($) =>
+      seq(field("name", $.identifier), "=", field("value", $._expression)),
     argument_list: ($) =>
       seq(
         "(",
@@ -331,8 +360,8 @@ module.exports = grammar({
             seq(
               choice(
                 seq(
-                  $._expression,
-                  repeat(seq(",", $._expression)),
+                  choice($._expression, $.named_argument),
+                  repeat(seq(",", choice($._expression, $.named_argument))),
                   optional(seq(",", $.varargs)),
                 ),
                 $.varargs,
@@ -374,6 +403,7 @@ module.exports = grammar({
           seq("*", $._type),
           $.proc_decl,
           seq("struct", $.struct_body),
+          seq($.identifier, ".", $._type),
         ),
       ),
 
@@ -394,6 +424,8 @@ module.exports = grammar({
         seq($.identifier, "::", $.code_directive),
       ),
     code_directive: ($) => seq(field("name", "#code"), $.block),
+    run_directive: ($) =>
+      seq("#run", choice($.block, $._expression), optional(";")),
     insert_directive: ($) => seq("#insert", $.identifier, ";"),
     assert_directive: ($) =>
       seq("#assert", field("arguments", $.argument_list), ";"),
@@ -423,7 +455,6 @@ module.exports = grammar({
         seq(field("name", $.identifier), ":", "..", field("type", $._type)),
       ),
 
-    varargs: ($) => prec(5, seq("..", $.identifier)),
 
     import_directive: ($) =>
       seq(
@@ -454,6 +485,7 @@ module.exports = grammar({
         $.unary_expression,
         $.parenthesized_expression,
         $.struct_literal_expr,
+        $.array_literal_expr,
         $.enum_value_expr,
         $.member_access_expr,
         $.range_expr,
@@ -463,14 +495,17 @@ module.exports = grammar({
         $.array_access,
         $.ifx_expr,
         $.char_expr,
-        $.varargs,
+        $.directive,
       ),
     char_expr: ($) => seq("#char", $.string),
     array_access: ($) => prec(7, seq($._expression, "[", $._expression, "]")),
     auto_cast_expr: ($) => seq("xx", $._expression),
     dereference: ($) => seq($.identifier, ".", "*"),
     undefined: ($) => "---",
-    range_expr: ($) => prec.right(3, seq($._expression, "..", $._expression)),
+
+    range_expr: ($) => prec.right(6, seq($._expression, "..", $._expression)),
+    varargs: ($) => prec(5, seq("..", $.identifier)),
+
     member_access_expr: ($) =>
       prec.left(
         6,
@@ -500,6 +535,14 @@ module.exports = grammar({
         ),
         "}",
       ),
+    array_literal_expr: ($) =>
+      seq(
+        optional(seq($.identifier, repeat(seq(".", $.identifier)))),
+        ".",
+        "[",
+        optional($._expression),
+        "]",
+      ),
     struct_initialize_without_field: ($) =>
       seq($._expression, repeat(seq(",", $._expression))),
     struct_initialize_with_field: ($) =>
@@ -520,6 +563,10 @@ module.exports = grammar({
             "operator",
             choice(
               "+",
+              "+=",
+              "-=",
+              "*=",
+              "/=",
               "-",
               "*",
               "/",
