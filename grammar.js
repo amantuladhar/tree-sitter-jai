@@ -97,8 +97,7 @@ module.exports = grammar({
       ),
     enum_body: ($) => seq("{", repeat($.enum_values), "}"),
 
-    union_definition: ($) =>
-      seq("union", $.union_body),
+    union_definition: ($) => seq("union", $.union_body),
 
     union_body: ($) =>
       seq("{", repeat(choice($.struct_field, $._statement)), "}"),
@@ -330,11 +329,16 @@ module.exports = grammar({
         choice(
           optional(
             seq(
-              $._expression,
-              repeat(choice(seq(",", $._expression), seq("..", $.identifier))),
+              choice(
+                seq(
+                  $._expression,
+                  repeat(seq(",", $._expression)),
+                  optional(seq(",", $.varargs)),
+                ),
+                $.varargs,
+              ),
             ),
           ),
-          seq("..", $.identifier),
         ),
         ")",
       ),
@@ -419,6 +423,8 @@ module.exports = grammar({
         seq(field("name", $.identifier), ":", "..", field("type", $._type)),
       ),
 
+    varargs: ($) => prec(5, seq("..", $.identifier)),
+
     import_directive: ($) =>
       seq(
         optional(seq(field("name", $.identifier), "::")),
@@ -457,15 +463,16 @@ module.exports = grammar({
         $.array_access,
         $.ifx_expr,
         $.char_expr,
+        $.varargs,
       ),
     char_expr: ($) => seq("#char", $.string),
-    array_access: ($) => seq($.identifier, "[", $._expression, "]"),
+    array_access: ($) => prec(7, seq($._expression, "[", $._expression, "]")),
     auto_cast_expr: ($) => seq("xx", $._expression),
     dereference: ($) => seq($.identifier, ".", "*"),
     undefined: ($) => "---",
-    range_expr: ($) => prec.right(2, seq($._expression, "..", $._expression)),
+    range_expr: ($) => prec.right(3, seq($._expression, "..", $._expression)),
     member_access_expr: ($) =>
-      prec(
+      prec.left(
         6,
         seq(
           field("object", $._expression),
