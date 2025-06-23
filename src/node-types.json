@@ -350,6 +350,14 @@
             "named": true
           },
           {
+            "type": "struct",
+            "named": false
+          },
+          {
+            "type": "struct_body",
+            "named": true
+          },
+          {
             "type": "struct_literal_expr",
             "named": true
           },
@@ -1176,6 +1184,10 @@
         },
         {
           "type": "string",
+          "named": true
+        },
+        {
+          "type": "struct_body",
           "named": true
         },
         {
@@ -3323,6 +3335,14 @@
             "named": true
           },
           {
+            "type": "struct",
+            "named": false
+          },
+          {
+            "type": "struct_body",
+            "named": true
+          },
+          {
             "type": "struct_literal_expr",
             "named": true
           },
@@ -3908,6 +3928,14 @@
           },
           {
             "type": "string",
+            "named": true
+          },
+          {
+            "type": "struct",
+            "named": false
+          },
+          {
+            "type": "struct_body",
             "named": true
           },
           {
@@ -4568,6 +4596,14 @@
             "named": true
           },
           {
+            "type": "struct",
+            "named": false
+          },
+          {
+            "type": "struct_body",
+            "named": true
+          },
+          {
             "type": "struct_literal_expr",
             "named": true
           },
@@ -4593,6 +4629,10 @@
           },
           {
             "type": "undefined",
+            "named": true
+          },
+          {
+            "type": "union_definition",
             "named": true
           },
           {
@@ -4927,6 +4967,100 @@
     }
   },
   {
+    "type": "union_body",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "assert_directive",
+          "named": true
+        },
+        {
+          "type": "break_statement",
+          "named": true
+        },
+        {
+          "type": "case_statement",
+          "named": true
+        },
+        {
+          "type": "constant",
+          "named": true
+        },
+        {
+          "type": "continue_statement",
+          "named": true
+        },
+        {
+          "type": "defer_statement",
+          "named": true
+        },
+        {
+          "type": "directive",
+          "named": true
+        },
+        {
+          "type": "expr_stmt",
+          "named": true
+        },
+        {
+          "type": "for_statement",
+          "named": true
+        },
+        {
+          "type": "if_case",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "insert_directive",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "struct_field",
+          "named": true
+        },
+        {
+          "type": "using_statement",
+          "named": true
+        },
+        {
+          "type": "variable",
+          "named": true
+        },
+        {
+          "type": "while_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "union_definition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "union_body",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "using",
     "named": true,
     "fields": {}
@@ -5084,6 +5218,10 @@
         },
         {
           "type": "string",
+          "named": true
+        },
+        {
+          "type": "struct_body",
           "named": true
         },
         {
@@ -5536,11 +5674,11 @@
   },
   {
     "type": "float",
-    "named": false
+    "named": true
   },
   {
     "type": "float",
-    "named": true
+    "named": false
   },
   {
     "type": "float32",
@@ -5641,6 +5779,10 @@
   {
     "type": "undefined",
     "named": true
+  },
+  {
+    "type": "union",
+    "named": false
   },
   {
     "type": "using",

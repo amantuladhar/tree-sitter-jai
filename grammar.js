@@ -76,7 +76,12 @@ module.exports = grammar({
           ":",
           field("type", $._type),
           optional(seq("=", field("default_value", $._expression))),
-          optional(","), // @todo - remove this? Hmm... why did I add this?
+          ";",
+        ),
+        seq(
+          field("name", $.identifier),
+          ":",
+          field("type", $.union_definition),
           ";",
         ),
       ),
@@ -91,6 +96,12 @@ module.exports = grammar({
         optional(";"),
       ),
     enum_body: ($) => seq("{", repeat($.enum_values), "}"),
+
+    union_definition: ($) =>
+      seq("union", $.union_body),
+
+    union_body: ($) =>
+      seq("{", repeat(choice($.struct_field, $._statement)), "}"),
     enum_values: ($) =>
       seq(
         field("name", $.identifier),
@@ -358,6 +369,7 @@ module.exports = grammar({
           // Pointer types
           seq("*", $._type),
           $.proc_decl,
+          seq("struct", $.struct_body),
         ),
       ),
 
@@ -480,9 +492,6 @@ module.exports = grammar({
           ),
         ),
         "}",
-        // @todo - this get picked up by variable so it has conflict
-        // maybe I need to construct this grammar differently so they don't have conflict
-        // ";",
       ),
     struct_initialize_without_field: ($) =>
       seq($._expression, repeat(seq(",", $._expression))),
